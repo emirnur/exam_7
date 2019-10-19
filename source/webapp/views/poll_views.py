@@ -1,4 +1,6 @@
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from webapp.forms import PollForm, ChoicePollForm
@@ -50,3 +52,11 @@ class PollDeleteView(DeleteView):
     model = Poll
     context_object_name = 'poll'
     success_url = reverse_lazy('index')
+
+
+class StatisticView(View):
+    def get(self, request, *args, **kwargs):
+        poll = Poll.objects.get(pk=kwargs.get('pk'))
+        choices = poll.choices.all()
+        context = {'poll': poll, 'choices': choices}
+        return render(request, 'poll/statistic.html', context=context)
