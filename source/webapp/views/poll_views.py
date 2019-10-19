@@ -1,7 +1,7 @@
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from webapp.forms import PollForm
+from webapp.forms import PollForm, ChoicePollForm
 from webapp.models import Poll
 
 
@@ -18,6 +18,13 @@ class PollView(DetailView):
     template_name = 'poll/poll.html'
     model = Poll
     context_key = 'poll'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        poll = self.object
+        context['form'] = ChoicePollForm()
+        context['choices'] = poll.polls.all()
+        return context
 
 
 class PollCreateView(CreateView):

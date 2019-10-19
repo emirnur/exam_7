@@ -10,4 +10,20 @@
 {% block content %}
     <h4>Question: {{ poll.question }}</h4>
     <p>Created at {{ poll.created_at|date:'d.m.Y H:i:s' }}</p>
+        <hr/>
+    <h4>Choices:</h4>
+    <div class="choice-list">
+        {% for choice in choices %}
+            <div class="choice">
+                <p>{{ choice.answer_option }}</p>
+                    <p class="choice-links">
+                        <a href="{% url 'choice_update' choice.pk %}">Edit</a>
+                        <a href="{% url 'choice_delete' choice.pk %}">Delete</a>
+                    </p>
+            </div>
+        {% endfor %}
+    </div>
+    <form action="{% url 'choice_add' poll.pk %}" method="POST" id="add_comment">
+            {% include 'partial/form.html' with button_text='Add' %}
+        </form>
 {% endblock %}

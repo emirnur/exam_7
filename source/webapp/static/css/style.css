@@ -101,3 +101,27 @@ h1 {
     color: #dddddd
 }
 
+.choice-list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.choice {
+    border: solid 1px #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.choice p {
+    margin: 0 0 5px;
+}
+
+.choice-links {
+    text-align: right;
+}
+
+.choice .choice-links {
+    margin: 5px 0 0;
+}
