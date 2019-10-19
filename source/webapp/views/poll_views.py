@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from webapp.forms import PollForm, ChoicePollForm
-from webapp.models import Poll
+from webapp.models import Poll, Answer
 
 
 class IndexView(ListView):
@@ -57,6 +57,10 @@ class PollDeleteView(DeleteView):
 class StatisticView(View):
     def get(self, request, *args, **kwargs):
         poll = Poll.objects.get(pk=kwargs.get('pk'))
-        choices = poll.choices.all()
+        choices = poll.polls.all()
+
+        print(Answer.objects.count())
+        for choice in choices:
+            print(len(Answer.objects.filter(choice__in=[choice.pk])))
         context = {'poll': poll, 'choices': choices}
         return render(request, 'poll/statistic.html', context=context)
