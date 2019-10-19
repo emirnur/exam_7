@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Answers{% endblock %}
+
+{% block content %}
+
+    <h2>Answers:</h2>
+    <div class="choice-list">
+
+        <div class="choice">
+            <h4>{{ poll.question }}</h4>
+            <hr>
+            <form method="POST" action="{% url 'answer' poll.pk %}">
+                {% csrf_token %}
+                {% for choice in poll.polls.all %}
+                    <p>
+                        <input type="radio"  name="choice" value="{{ choice.pk }}">
+                        <label for="choice">{{ choice }}</label>
+                    </p>
+                {% endfor %}
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+{% endblock %}

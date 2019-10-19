@@ -17,7 +17,6 @@ class IndexView(ListView):
 class PollView(DetailView):
     template_name = 'poll/poll.html'
     model = Poll
-    context_key = 'poll'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

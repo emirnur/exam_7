@@ -24,4 +24,4 @@ class Answer(models.Model):
                                  related_name='answer_poll')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     choice = models.ForeignKey('webapp.Choice', on_delete=models.CASCADE, null=False, blank=False, verbose_name='Вариант ответа',
-                             related_name='answer_poll')
+                             related_name='answer_choice')
